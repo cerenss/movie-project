@@ -36,7 +36,7 @@ const autorun = async () => {
   const genres = await fetchGenres();
   
   renderMovies(movies.results, genres);
-  // renderMovies(movies.results);
+   renderMovies(movies.results);
   
   console.log(movies.results);
 };
@@ -51,7 +51,6 @@ const constructUrl = (path) => {
 // You may need to add to this function, definitely don't delete it.
 const movieDetails = async (movie) => {
   const movieRes = await fetchMovie(movie.id);
-  console.log(movieRes);
   renderMovie(movieRes);
 };
 
@@ -70,6 +69,7 @@ const fetchMovie = async (movieId) => {
   const url = constructUrl(`movie/${movieId}`);
   const res = await fetch(url);
   return res.json();
+  
 };
 
 // You'll need to play with this function in order to add features and enhance the style.
@@ -234,6 +234,7 @@ const renderMovies = async (movies, genres) => {
       movieDetails(movie);
     });
     CONTAINER.appendChild(movieDiv); */
+    console.log(movie);
   });
 };
 
@@ -259,8 +260,33 @@ const renderMovie = (movie) => {
             <h3>Actors:</h3>
             <ul id="actors" class="list-unstyled"></ul>
     </div>`;
-    console.log(movie.runtime);
+    
 };
 
-  document.addEventListener("DOMContentLoaded", autorun); 
+document.addEventListener("DOMContentLoaded", autorun); 
 
+
+
+// Menu Behavior
+
+const menuLink = document.getElementsByClassName("menu-link");
+const menuLinkArray = Array.from(menuLink);
+const menuItem = document.getElementsByClassName("menu-item");
+const menuItemArray = Array.from(menuItem);
+const menu = document.querySelector(".menu");
+
+
+menuLinkArray.forEach((link) => {
+  link.addEventListener("click", () => {
+    link.classList.remove("menu-link-grayed");
+    menuLinkArray.forEach((i) => {
+      if (i !== link) {
+        i.classList.add("menu-link-grayed");
+      }
+      i.classList.add("menu-link-clicked");
+    })
+    setTimeout(() => {
+      menu.classList.add("menu-clicked");
+    }, 500)
+  })
+})

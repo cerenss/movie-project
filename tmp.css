@@ -1,0 +1,29 @@
+.text-container {
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .collapsing-text {
+    display: inline-block;
+    font-size: 4em;
+    font-weight: 800;
+
+  }
+  
+  .collapsing-text:hover {
+    animation: collapsing 0.3s linear forwards;
+    transform-origin: left center;
+
+  }
+  
+  @keyframes collapsing {
+    0% {
+      transform: scaleX(1);
+     
+    }
+    100% {
+      transform: scaleX(0.8);
+      
+    }
+  }
+  
